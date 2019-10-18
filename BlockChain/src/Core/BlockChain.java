@@ -1,8 +1,11 @@
+package Core;
+
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -19,17 +22,17 @@ import javax.swing.JOptionPane;
  */
 public class BlockChain {
     
-    ArrayList<Block> chain = new ArrayList<>();
+    protected ArrayList<Block> chain = new ArrayList<>();
     
-    public void add(String data){
-        int prev = getLastBlock();
+    public void add(String data) throws NoSuchAlgorithmException, InterruptedException{
+        String prev = getLastBlock();
         Block block = new Block(prev, data);
         chain.add(block);
     }
     
-    public int getLastBlock(){
+    public String getLastBlock(){
         if(chain.isEmpty())
-            return 0;
+            return "";
         return chain.get(chain.size() - 1).hash;
     }
     
