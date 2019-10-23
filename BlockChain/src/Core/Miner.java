@@ -16,12 +16,14 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author MisterZii
- */
 public class Miner {
 
+    /**
+     * Efectua a mineração do bloco enviado por parâmetro
+     * @param b Bloco a ser minerado
+     * @throws NoSuchAlgorithmException
+     * @throws InterruptedException 
+     */
     public static void mine(Block b) throws NoSuchAlgorithmException, InterruptedException {
 
         AtomicBoolean isDone = new AtomicBoolean(false);

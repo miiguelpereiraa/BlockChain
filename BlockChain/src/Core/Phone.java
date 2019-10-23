@@ -7,35 +7,32 @@ package Core;
 
 import java.security.NoSuchAlgorithmException;
 
-/**
- *
- * @author MisterZii
- */
+
 public class Phone extends Block{
     
     private int id;
     private String desc;
     
+    /**
+     * Constrói um bloco com informação sobre o telemóvel, dado o hash do bloco anterior, o id do telefone e uma descrição
+     * @param previous Hash do bloco anterior
+     * @param id Id do telefone
+     * @param desc Descrição
+     * @throws NoSuchAlgorithmException
+     * @throws InterruptedException 
+     */
     public Phone(String previous, int id, String desc) throws NoSuchAlgorithmException, InterruptedException {
         super(previous, id+desc);
         this.id = id;
         this.desc = desc;
     }
 
+    /**
+     * Obtém o id de um bloco
+     * @return int que representa o id do bloco
+     */
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
     
 }

@@ -8,10 +8,7 @@ import java.security.NoSuchAlgorithmException;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author MisterZii
- */
+
 public class App {
     public static void main(String[] args) throws NoSuchAlgorithmException, InterruptedException {
         BlockChain bc = new BlockChain();

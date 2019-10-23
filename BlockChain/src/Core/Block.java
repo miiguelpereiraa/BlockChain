@@ -1,7 +1,6 @@
 package Core;
 
 
-import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -14,10 +13,6 @@ import java.util.logging.Logger;
  * and open the template in the editor.
  */
 
-/**
- *
- * @author MisterZii
- */
 public class Block {
     
     String previous;
@@ -28,46 +23,61 @@ public class Block {
     protected long nonce;
     protected int size;
 
+    /**
+     * Obtém a hash do bloco anterior
+     * @return String da hash do bloco anterior
+     */
     public String getPrevious() {
         return previous;
     }
-
-    public void setPrevious(String previous) {
-        this.previous = previous;
-    }
-
+    
+    /**
+     * Obtém o fact do bloco
+     * @return String do fact do bloco
+     */
     public String getFact() {
         return fact;
     }
 
-    public void setFact(String fact) {
-        this.fact = fact;
-    }
-
-    public String getHash() {
-        return hash;
-    }
-
+    /**
+     * Definir a hash do bloco
+     * @param hash hash a definir
+     */
     public void setHash(String hash) {
         this.hash = hash;
     }
 
+    /**
+     * Obtém o nonce do bloco
+     * @return long do nonce do bloco
+     */
     public long getNonce() {
         return nonce;
     }
 
+    /**
+     * Definir o nonce do bloco
+     * @param nonce 
+     */
     public void setNonce(long nonce) {
         this.nonce = nonce;
     }
 
+    /**
+     * Obtém o size do bloco
+     * @return int do size do bloco
+     */
     public int getSize() {
         return size;
     }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
     
+    /**
+     * Constroi um bloco usando o previous, o fact, o size e inicia os mineiros
+     * @param previous hash do bloco anterior
+     * @param data informação a guardar no bloco
+     * @throws NoSuchAlgorithmException
+     * @throws InterruptedException 
+     */
     public Block(String previous, String data) throws NoSuchAlgorithmException, InterruptedException{
         this.previous = previous;
         this.fact = data;
@@ -75,6 +85,7 @@ public class Block {
         Miner.mine(this);
     }
     
+    //VER ESTE MÉTODO
     public String calcHash() throws NoSuchAlgorithmException{
         MessageDigest hasher = MessageDigest.getInstance("SHA-256");
         String msg = (previous + fact + nonce);
@@ -82,10 +93,19 @@ public class Block {
         return Base64.getEncoder().encodeToString(hbytes);
     }
     
+    /**
+     * Verifica se a hash do bloco é válida
+     * @return true ou false caso a hash seja válida ou não
+     * @throws NoSuchAlgorithmException 
+     */
     public boolean isValid() throws NoSuchAlgorithmException{
         return calcHash().equals(hash);
     }
     
+    /**
+     * Imprime a informação do bloco
+     * @return String com a informação sobre o bloco
+     */
     @Override
     public String toString(){
         try {
