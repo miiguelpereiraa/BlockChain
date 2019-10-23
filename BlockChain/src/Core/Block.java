@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author MisterZii
  */
-public class Block implements Serializable{
+public class Block {
     
     String previous;
     
@@ -71,12 +71,11 @@ public class Block implements Serializable{
     public Block(String previous, String data) throws NoSuchAlgorithmException, InterruptedException{
         this.previous = previous;
         this.fact = data;
-        this.size = 4;
+        this.size = 2;
         Miner.mine(this);
     }
     
     public String calcHash() throws NoSuchAlgorithmException{
-        //return (previous + fact + nonce).hashCode();
         MessageDigest hasher = MessageDigest.getInstance("SHA-256");
         String msg = (previous + fact + nonce);
         byte[] hbytes = hasher.digest(msg.getBytes());
@@ -87,10 +86,10 @@ public class Block implements Serializable{
         return calcHash().equals(hash);
     }
     
-    //CONFIRMAR MÉTODO
+    @Override
     public String toString(){
         try {
-            return String.format("%20s %10s (%6d) %20s %b", previous, fact, nonce, hash, isValid());
+            return String.format("%20s | %10s |(%6d)| %20s | %b", previous, fact, nonce, hash, isValid());
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Block.class.getName()).log(Level.SEVERE, null, ex);
         }

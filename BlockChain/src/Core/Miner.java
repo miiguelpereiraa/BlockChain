@@ -3,10 +3,12 @@ package Core;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.util.Base64;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import miners.MinerTHR;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,16 +23,6 @@ import miners.MinerTHR;
 public class Miner {
 
     public static void mine(Block b) throws NoSuchAlgorithmException, InterruptedException {
-//        int num = (int) Math.pow(10, b.size);
-//        String prefix = String.format("%0"+b.size+"d", 0);
-//        b.nonce = 0;
-//        while (true) {
-//            if (b.calcHash().startsWith(prefix)) {
-//                b.hash = b.calcHash();
-//                break;
-//            }
-//            b.nonce++;
-//        }
 
         AtomicBoolean isDone = new AtomicBoolean(false);
         AtomicLong nonce = new AtomicLong(0);
@@ -49,8 +41,10 @@ public class Miner {
         
         b.setNonce(nonce.get());
         
-        MessageDigest hasher = MessageDigest.getInstance("SHA-256");
-        byte[] bh = hasher.digest((b.getFact()+b.getNonce()).getBytes());
+        Security.addProvider(new BouncyCastleProvider());
+        
+        MessageDigest hasher = MessageDigest.getInstance("SHA3-256");
+        byte[] bh = hasher.digest((b.getPrevious() + b.getFact() + b.getNonce()).getBytes());
         b.setHash(Base64.getEncoder().encodeToString(bh));
     }
 }

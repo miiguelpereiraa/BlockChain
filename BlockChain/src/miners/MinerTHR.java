@@ -8,11 +8,13 @@ package miners;
 import Core.Block;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.util.Base64;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 /**
  *
  * @author MisterZii
@@ -31,7 +33,9 @@ public class MinerTHR extends Thread{
     
     public void run(){
         try {
-            MessageDigest hasher = MessageDigest.getInstance("SHA-256");
+            Security.addProvider(new BouncyCastleProvider());
+            
+            MessageDigest hasher = MessageDigest.getInstance("SHA3-256");
             String prefix = String.format("%0"+block.getSize()+"d",0);
             
             while(!isDone.get()){
@@ -39,7 +43,7 @@ public class MinerTHR extends Thread{
                 
                 //Falta ligar ao previous
                 //Criar objecto telemovel que herda de bloco e alteramos apenas o fact - criar os atributos que precisamos nele
-                String msg = block.getFact() + num;
+                String msg = block.getPrevious() + block.getFact() + num;
                 byte[] h = hasher.digest(msg.getBytes());
                 String txtH = Base64.getEncoder().encodeToString(h);
                 

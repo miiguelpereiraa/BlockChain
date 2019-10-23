@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -22,11 +23,17 @@ import javax.swing.JOptionPane;
  */
 public class BlockChain {
     
-    protected ArrayList<Block> chain = new ArrayList<>();
+    protected ArrayList<Phone> chain = new ArrayList<>();
     
-    public void add(String data) throws NoSuchAlgorithmException, InterruptedException{
+//    public void add(String data) throws NoSuchAlgorithmException, InterruptedException{
+//        String prev = getLastBlock();
+//        Block block = new Block(prev, data);
+//        chain.add(block);
+//    }
+    
+    public void addPhone(int id, String desc) throws NoSuchAlgorithmException, InterruptedException{
         String prev = getLastBlock();
-        Block block = new Block(prev, data);
+        Phone block = new Phone(prev, id, desc);
         chain.add(block);
     }
     
@@ -42,15 +49,12 @@ public class BlockChain {
         }
     }
     
-    public void save(){
-        try{
-            FileOutputStream fOS = new FileOutputStream("save");
-            ObjectOutputStream objectOS = new ObjectOutputStream(fOS);
-            objectOS.writeObject(chain);
-        }catch(FileNotFoundException ex){
-            JOptionPane.showMessageDialog(new JDialog(), ex.getMessage());
-        }catch(IOException ex){
-            JOptionPane.showMessageDialog(new JDialog(), ex.getMessage());
+    public List<Phone> getBlockById(int id){
+        ArrayList<Phone> phones = new ArrayList<>();
+        for (Phone phone : chain) {
+            if(phone.getId() == id)
+                phones.add(phone);
         }
+        return phones;
     }
 }
