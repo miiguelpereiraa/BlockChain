@@ -1,6 +1,7 @@
-package Core;
+package miners;
 
 
+import Core.Block;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;

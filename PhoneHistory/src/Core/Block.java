@@ -1,11 +1,10 @@
 package Core;
 
 
+import miners.Miner;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -108,12 +107,7 @@ public class Block {
      */
     @Override
     public String toString(){
-        try {
-            return String.format("%20s | %10s |(%6d)| %20s | %b", previous, fact, nonce, hash, isValid());
-        } catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Block.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return "";
+        return String.format("%20s | %10s |(%6d)| %20s ", previous, fact, nonce, hash);
     }
     
 }
