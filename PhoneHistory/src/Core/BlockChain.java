@@ -1,15 +1,9 @@
 package Core;
 
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -56,6 +50,15 @@ public class BlockChain {
     public void print(){
         for (Block block : chain) {
             System.out.println(block.toString());
+        }
+    }
+    
+    /**
+     * Imprime os Phones da blockchain
+     */
+    public void printPhones(){
+        for (Phone phone : chain) {
+            System.out.println(phone.toString());
         }
     }
     

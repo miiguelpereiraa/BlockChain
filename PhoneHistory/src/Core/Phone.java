@@ -35,4 +35,14 @@ public class Phone extends Block{
         return id;
     }
     
+    /**
+     * Imprime a informação de Phone
+     * @return String com a informação sobre o Phone
+     */
+    @Override
+    public String toString(){
+        return String.format("%20s | %d , %10s |(%6d)| %20s ", previous, id, desc, nonce, hash);
+    }
+    
+    
 }

@@ -14,7 +14,7 @@ import java.util.Base64;
 
 public class Block {
     
-    String previous;
+    protected String previous;
     
     protected String fact;
     

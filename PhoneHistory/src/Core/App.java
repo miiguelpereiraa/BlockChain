@@ -19,7 +19,7 @@ public class App {
         bc.addPhone(0, "Primeiro Telefone");
         bc.addPhone(0, "Primeira reparação");
         bc.addPhone(1, "Segundo Telefone");
-        bc.print();
+        bc.printPhones();
 //        for(Phone ph : bc.getBlockById(0)){
 //            System.out.println(ph.getDesc());
 //        }
